@@ -28,5 +28,24 @@ class Program
         Console.WriteLine($"The sum of the list is: {num_list.Sum()}");
         Console.WriteLine($"The average is: {num_list.Average()}");
         Console.WriteLine($"The largest number is: {num_list.Max()}");
+
+        int spn = num_list.Where(t => t > 0).Min();
+
+        if (spn > 0)
+        {
+            Console.WriteLine($"The smallest positive number is: {spn}");
+        }
+        else
+        {
+            Console.WriteLine("There are no positive numbers in this list.");
+        }
+        List<int> sorted_list = num_list;
+        sorted_list.Sort();
+
+        Console.WriteLine("Here is the sorted list: ");
+        foreach (int num in sorted_list)
+        {
+            Console.WriteLine($"{num}");
+        }
     }
 }
