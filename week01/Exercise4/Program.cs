@@ -45,7 +45,7 @@ class Program
         Console.WriteLine("Here is the sorted list: ");
         foreach (int num in sorted_list)
         {
-            Console.WriteLine($"{num}");
+            Console.WriteLine(num);
         }
     }
 }
