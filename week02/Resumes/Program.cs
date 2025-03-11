@@ -14,11 +14,16 @@ class Program
         Job job2 = new Job();
         job2._company = "Apple";
         job2._jobTitle = "Software Architect";
-        job2._startYear = 2000;
+        job2._startYear = 2007;
         job2._endYear = 2015;
 
-        job1.Display();
-        job2.Display();
+        Resume myResume = new Resume();
+        myResume._name = "Taylor Allen";
+        myResume._jobs.Add(job1);
+        myResume._jobs.Add(job2);
+
+        myResume.Display();
+
     }
 
 
