@@ -1,5 +1,8 @@
 using System;
 using System.Security.Cryptography.X509Certificates;
+using System.Collections.Generic;
+using System.IO;
+//Extra credit:  In the Journal.cs file, I added some error handling to the LoadFromFile method to return an empty Journal instance if a user types in a filename that does not exist.
 
 class Program
 {
@@ -7,7 +10,6 @@ class Program
     {
         Journal journal = new Journal();
         bool isRunning = true;
-
 
         //Menu options
         while (isRunning){
@@ -32,7 +34,7 @@ class Program
                     Console.Write("> ");
                     string userResponse = Console.ReadLine();
 
-                    Entry userEntry = new Entry(prompt, userResponse );
+                    Entry userEntry = new Entry(prompt, userResponse);
                     userEntry.Display();
                     journal.AddEntry(userEntry);
 
@@ -44,23 +46,24 @@ class Program
                     break;
             //3. Save to File
                 case "3":
+                    Console.Write("Please enter a filename to save your journal: ");
+                    string filename = Console.ReadLine();
+                    filename = filename + ".txt";
+                    journal.SaveToFile(journal._entries, filename);
                     break;
             //4. Load from File
                 case "4":
+                    Console.Write("Please enter the filename of your journal (ex: journal.txt): ");
+                    string loadedFile = Console.ReadLine();
+                    journal = journal.LoadFromFile(loadedFile);
+
                     break;
             //5. Quit
                 case "5":
                     isRunning = false;
                     break;
             }
-        
-
-        }
-        
-        
-        
-
-        
-
+        } 
     }
+
 }
