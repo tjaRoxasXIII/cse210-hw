@@ -1,7 +1,9 @@
+using System.Text;
+
 class Word
 {
-    string _text;
-    bool _isHidden;
+    private string _text;
+    private bool _isHidden;
 
     public Word(string text)
     {
@@ -11,21 +13,38 @@ class Word
 
     public void Hide()
     {
-
+        _isHidden = true;
+        if (_isHidden)
+        {
+            StringBuilder newText = new StringBuilder();
+            foreach(char letter in _text)
+            {
+                newText.Append("_");
+            }
+            _text = newText.ToString();
+        }
     }
 
     public void Show()
     {
-
+        _isHidden = false;
     }
 
     public bool IsHidden()
     {
-        return true;
+        return _isHidden;
     }
 
     public string GetDisplayText()
     {
-        return "";
+        if (_isHidden == true)
+        {
+            Hide();
+        }
+        else
+        {
+            Show();
+        }
+        return ($"{_text}");
     }
 }

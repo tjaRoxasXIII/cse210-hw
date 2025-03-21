@@ -1,6 +1,6 @@
 class Scripture
 {
-    Reference _reference = new Reference();
+    Reference _reference = new Reference("", 1, 1, 1);
     List<Word> _words = new List<Word>();
 
     public Scripture(Reference reference, string text)
