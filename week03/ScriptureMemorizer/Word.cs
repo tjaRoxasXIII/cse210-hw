@@ -13,16 +13,23 @@ class Word
 
     public void Hide()
     {
-        _isHidden = true;
-        if (_isHidden)
+        if (_isHidden == false)
         {
             StringBuilder newText = new StringBuilder();
             foreach(char letter in _text)
             {
-                newText.Append("_");
+                string l = letter.ToString();
+                if (l != "," && l != ";" && l != ".")
+                {
+                    newText.Append("_");
+                }
+                else{
+                    newText.Append(l);
+                }
             }
             _text = newText.ToString();
         }
+        _isHidden = true;
     }
 
     public void Show()

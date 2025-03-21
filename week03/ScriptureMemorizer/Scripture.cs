@@ -17,16 +17,43 @@ class Scripture
 
     public void HideRandomWords(int numToHide)
     {
-        
+        int i = 0;
+        while (i != numToHide)
+        {
+            bool stopHiding = IsCompletelyHidden();
+
+            Random rnd = new Random();
+            int index = rnd.Next(_words.Count);
+            if (!_words[index].IsHidden() && stopHiding == false)
+            {
+                _words[index].Hide();
+                i++;
+            }
+        }
     }
 
     public string GetDisplayText()
     {
-        return "";
+        string newText = "";
+        foreach (Word word in _words)
+        {
+            
+            newText += word.GetDisplayText() + " ";
+        }
+        return ($"{_reference.GetDisplayText()}\n {newText}");
     }
 
     public bool IsCompletelyHidden()
     {
-        return false;
+        bool fullyHidden = true;
+        foreach(Word word in _words)
+        {
+            if (word.IsHidden() == false)
+            {
+                fullyHidden = false;
+                break;
+            }
+        }
+        return fullyHidden;
     }
 }
