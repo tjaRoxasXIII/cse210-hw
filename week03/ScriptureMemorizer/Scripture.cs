@@ -18,17 +18,24 @@ class Scripture
     public void HideRandomWords(int numToHide)
     {
         int i = 0;
+        bool stopHiding = IsCompletelyHidden();
+        
+        if (numToHide > UnhiddenWordsRemaining())
+        {
+            numToHide = UnhiddenWordsRemaining();
+        }
+
         while (i != numToHide)
         {
-            bool stopHiding = IsCompletelyHidden();
-
             Random rnd = new Random();
             int index = rnd.Next(_words.Count);
             if (!_words[index].IsHidden() && stopHiding == false)
             {
                 _words[index].Hide();
                 i++;
+
             }
+            
         }
     }
 
@@ -55,5 +62,20 @@ class Scripture
             }
         }
         return fullyHidden;
+    }
+
+    public int UnhiddenWordsRemaining()
+    {
+        int remainingWords = 0;
+        foreach(Word word in _words)
+        {
+            if (word.IsHidden() == false)
+            {
+                remainingWords++;
+            }
+        }
+
+        return remainingWords;
+
     }
 }
