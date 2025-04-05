@@ -4,7 +4,7 @@ public class Activity
 {
     string _name;
     string _description;
-    int _duration;
+    public int _duration;
 
     public Activity(string name, string description, int duration)
     {
