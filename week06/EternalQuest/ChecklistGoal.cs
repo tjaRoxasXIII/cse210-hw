@@ -11,15 +11,24 @@ class ChecklistGoal : Goal
 
     public override void RecordEvent()
     {
-
+        IsComplete();
+        GetStringRepresentation();
     }
     public override bool IsComplete()
     {
-        return true;
+        if(_amountCompleted == _target)
+        {
+            _points += _bonus;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
    
     public override string GetStringRepresentation()
     {
-        return "";
+        return $"{_amountCompleted}/{_target} {_name} | {_description} | {_points}";
     }
 }
