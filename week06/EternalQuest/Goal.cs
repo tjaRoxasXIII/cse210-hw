@@ -19,4 +19,8 @@ abstract class Goal
     {
         return "";
     }
+    public int AddPoints()
+    {
+        return Int32.Parse(_points);
+    }
 }

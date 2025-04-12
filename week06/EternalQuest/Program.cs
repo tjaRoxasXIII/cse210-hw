@@ -3,7 +3,6 @@ using System;
 class Program
 {
     static List<Goal> goals = new List<Goal>();
-    static int score = 0;
     static GoalHandler manager = new GoalHandler(0, goals);
 
     static void Main()
@@ -11,7 +10,9 @@ class Program
         bool running = true;
         while (running)
         {
-            Console.Clear();
+            int score = manager.ReturnScore();
+
+           // Console.Clear();
             Console.WriteLine($"Score: {score}");
             Console.WriteLine("1. Create New Goal");
             Console.WriteLine("2. List Goals");
@@ -23,7 +24,7 @@ class Program
             switch (Console.ReadLine())
             {
                 case "1": manager.CreateGoal(); break;
-                case "2": manager.ListGoals(); Console.ReadLine(); break;
+                case "2": manager.ListGoals(); break;
                 case "3": manager.RecordEvent(); break;
                 case "4": manager.SaveGoals(); break;
                 case "5": manager.LoadGoals(); break;

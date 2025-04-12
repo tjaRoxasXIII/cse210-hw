@@ -22,15 +22,15 @@ class GoalHandler
     public void ListGoals()
     {
         Console.WriteLine("\nYour Goals:");
-        for (int i = 0; i < _goals.Count; i++)
-        {
-            Console.WriteLine($"{i + 1}. {_goals[i].GetDetailsString()}");
-        }
+        ListGoalDetails();
     }
 
     public void ListGoalDetails()
     {
-
+        for (int i = 0; i < _goals.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {_goals[i].GetStringRepresentation()}");
+        }
     }
 
     public void CreateGoal()
@@ -52,23 +52,36 @@ class GoalHandler
         switch (choice)
         {
             case "1":
-                new SimpleGoal(name, description, points);
+                Goal sGoal = new SimpleGoal(name, description, points);
+                _goals.Add(sGoal);
                 break;
             case "2":
-                new EternalGoal(name, description, points);
+                Goal eGoal = new EternalGoal(name, description, points);
+                _goals.Add(eGoal);
                 break;
             case "3":
                 Console.Write("Target Count: ");
                 int target = int.Parse(Console.ReadLine());
                 Console.Write("Bonus Points on Completion: ");
                 int bonus = int.Parse(Console.ReadLine());
-                new ChecklistGoal(name, description, points, target, bonus);
+                Goal cGoal = new ChecklistGoal(name, description, points, target, bonus);
+                _goals.Add(cGoal);
                 break;
         }
     }
     
     public void RecordEvent()
     {
+        Console.WriteLine("Which goal did you complete?");
+        ListGoalDetails();
+        Console.WriteLine("");
+        string choice = Console.ReadLine();
+        int intChoice = Int32.Parse(choice) - 1;
+        
+
+        _goals[intChoice].RecordEvent();
+        
+        _score += _goals[intChoice].AddPoints();
 
     }
 
@@ -80,5 +93,10 @@ class GoalHandler
     public void LoadGoals()
     {
          
+    }
+
+    public int ReturnScore()
+    {
+        return _score;
     }
 }

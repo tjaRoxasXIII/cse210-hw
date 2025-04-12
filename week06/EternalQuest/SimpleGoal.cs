@@ -8,8 +8,16 @@ class SimpleGoal : Goal
 
     public override void RecordEvent()
     {
-        IsComplete();
-        GetStringRepresentation();
+        if(!_isComplete)
+        {
+            IsComplete();
+            GetStringRepresentation();
+        }
+        else
+        {
+            Console.WriteLine("This goal has already been completed");
+            _points = "0";
+        }
     }
     public override bool IsComplete()
     {
@@ -28,4 +36,5 @@ class SimpleGoal : Goal
             return $"[X] {_name} | {_description} | {_points}";
         }
     }
+    
 }
